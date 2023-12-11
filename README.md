@@ -1,4 +1,4 @@
 # zomato_clone
 Using HTML, CSS, JavaScript and using JavaScript Promises
 
-Tihs is me 
+This is me 
