@@ -8,14 +8,19 @@ let restaurantTimer = null;
 window.addEventListener('load', function(){
     document.getElementById('acceptOrder').addEventListener('click', function(){
         askRestaurantToAcceptOrReject();
-
-        checkIfOrderAcceptedFromRestaurant()
-        .then(res=>{
-            console.log( 'updated from retaurant -' ,res);
-        })
-       .catch(err=>{
-           console.log(err);
        })
+
+    checkIfOrderAcceptedFromRestaurant()
+        .then(isOrderAccepted => {
+            console.log('updated from retaurant - ', isOrderAccepted);
+            // step - Start preparing
+            if(isOrderAccepted) alert('Your order has been accepted');
+            //step 3  order rejected
+            else alert('Sorry restaurant couldnt accpet your order! Returning your amount with zomato shares');
+        })
+        .catch(err => {
+            console.log(err);
+            alert('Something went wrong! Please try again later');
     });  
 })
 
@@ -39,7 +44,7 @@ function checkIfOrderAcceptedFromRestaurant() {
             if(!hasRestaurantSeenYourOrder) return;
 
             if(isOrderAccepted) resolve(true);
-            else reject(flase);
+            else resolve(flase);
 
             clearInterval(restaurantTimer);
         },2000);
